@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora de IMC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .input-group {
+      margin-bottom: 10px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+    
+    #resultado {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    
+    .verde {
+      color: green;
+    }
+    
+    .laranja {
+      color: orange;
+    }
+    
+    .vermelho {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculadora de IMC</h1>
+
+  <div id="calculadora">
+    <div class="input-group">
+      <label for="peso">Peso (kg):</label>
+      <input type="number" id="peso" step="0.01" min="0" required>
+    </div>
+
+    <div class="input-group">
+      <label for="altura">Altura (m):</label>
+      <input type="number" id="altura" step="0.01" min="0" required>
+    </div>
+
+    <button onclick="calcularIMC()">Calcular</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularIMC() {
+      var peso = parseFloat(document.getElementById("peso").value);
+      var altura = parseFloat(document.getElementById("altura").value);
+
+      var imc = peso / (altura * altura);
+
+      var resultado = document.getElementById("resultado");
+
+      resultado.innerHTML = "Seu IMC é: " + imc.toFixed(2);
+
+      if (imc < 18.5) {
+        resultado.className = "vermelho";
+        resultado.innerHTML += " - Situação: Abaixo do Peso";
+      } else if (imc >= 18.5 && imc < 25) {
+        resultado.className = "verde";
+        resultado.innerHTML += " - Situação: Peso Normal";
+      } else if (imc >= 25 && imc < 30) {
+        resultado.className = "laranja";
+        resultado.innerHTML += " - Situação: Sobrepeso";
+      } else if (imc >= 30 && imc < 35) {
+        resultado.className = "vermelho";
+        resultado.innerHTML += " - Situação: Obesidade Grau I";
+      } else if (imc >= 35 && imc < 40) {
+        resultado.className = "vermelho";
+        resultado.innerHTML += " - Situação: Obesidade Grau II";
+      } else {
+        resultado.className = "vermelho";
+        resultado.innerHTML += " - Situação: Obesidade Grau III";
+      }
+    }
+  </script>
+</body>
+</html>
